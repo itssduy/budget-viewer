@@ -1,0 +1,30 @@
+
+<div class="container">
+    <form class="form" (submit)="onSubmit($event)" [formGroup]="budgetForm">
+        <input type="text" placeholder="Budget" formControlName="totalBudget">
+        <select name="" id="type" formControlName="type">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+        </select>
+
+        <div formArrayName="spendings">
+            @for (spending of spendings.controls; track $index; let i = $index){
+                <div [formGroupName]="i">
+                    <input type="number" placeholder="Amount" formControlName="amount">
+                </div>        
+            }
+        </div>
+        
+
+        <button (click)="addSpending()" type="button">Add spending</button>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+@if (chartData){
+    <img [src]="chartData" alt="">
+}
+
